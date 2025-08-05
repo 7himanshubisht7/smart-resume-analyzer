@@ -1,12 +1,10 @@
 streamlit
 pandas
-pafy
 plotly
 pymysql
 streamlit-tags
 Pillow
-youtube-dl
+yt-dlp
 nltk
-pdfminer3
-pyresparser
-spacy==2.3.5
+pdfminer.six
+spacy
