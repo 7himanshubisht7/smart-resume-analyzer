@@ -1,30 +1,40 @@
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-
 import spacy
-try:
-    nlp = spacy.load("en_core_web_sm")
-except:
-    from spacy.cli import download
-    download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+import importlib.util
 
+# Download necessary NLTK data
+nltk.download('stopwords')
+nltk.download('punkt')
+
+# Automatically download model if not present
+def load_spacy_model(model_name="en_core_web_sm"):
+    if importlib.util.find_spec(model_name) is None:
+        from spacy.cli import download
+        download(model_name)
+    return spacy.load(model_name)
+
+# Load the spaCy model safely
+nlp = load_spacy_model()
 
 import pandas as pd
-import base64, random
-import time, datetime
+import base64
+import random
+import time
+import datetime
 from pyresparser import ResumeParser
 from pdfminer3.layout import LAParams, LTTextBox
 from pdfminer3.pdfpage import PDFPage
 from pdfminer3.pdfinterp import PDFResourceManager
 from pdfminer3.pdfinterp import PDFPageInterpreter
 from pdfminer3.converter import TextConverter
-import io, random
+import io
 from streamlit_tags import st_tags
 from PIL import Image
 import pymysql
-from Courses import ds_course, web_course, android_course, ios_course, uiux_course, resume_videos, interview_videos
+from Courses import (
+    ds_course, web_course, android_course,
+    ios_course, uiux_course, resume_videos, interview_videos
+)
 import pafy
 import plotly.express as px
 import youtube_dl
